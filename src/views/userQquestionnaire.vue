@@ -242,8 +242,22 @@ export default {
 .el-button--primary {
   min-width: 300px;
 }
-::v-deep .el-form-item--medium .el-form-item__label {
-  color: green;
+::v-deep  .el-form-item__label {
+   font-weight: 700;
+   font-family: "微软雅黑";
+  font-size: 16px;
+  color:black;
+}
+.span_a{
+  color: #606266;
+      font-size: 16px;
+}
+::v-deep  .el-form-item__content{
+    font-size: 18px;
+    width: 360px;
+}
+::v-deep.el-textarea__inner{
+  width: 400px;
 }
 .inline {
   /* display: inline-block; */
