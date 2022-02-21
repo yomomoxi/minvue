@@ -137,7 +137,6 @@ export default {
       labelPosition: "top",
       form: {
         desc: "",
-        // questions:[{       questionId:'' ,      optionId:"",        questionType:"",}],
       },
       option_index: [
         "A",
@@ -202,9 +201,6 @@ export default {
           console.error(res.data)
         }
       });
-      // this.form.questions.forEach((question) => {
-      //     question.array = [];
-      //   });
     },
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
