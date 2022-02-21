@@ -101,11 +101,12 @@
         </div>
       </template>
       <el-form-item size="large" style="text-align: center; margin-top: 30px">
-        <el-button type="primary" v-show="show" @click="onSubmit('form')">提交</el-button>
+        <el-button type="primary" v-show="show" v-on:click.once="onSubmit('form')">提交</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 <script>
 import axios from "axios";
 export default {
@@ -169,7 +170,9 @@ export default {
     };
   },
 
-  watch: {},
+  watch: {
+    
+  },
   created() {
     this.open();
   },
@@ -177,11 +180,10 @@ export default {
   computed: {},
   methods: {
     open() {
-      console.log(this.$route.query.taskId);
-      console.log(this.$route.query.currentNo);
+      // console.log(this.$route.query.taskId);
+      // console.log(this.$route.query.currentNo);
       this.currentNo=this.$route.query.currentNo
       this.taskId=this.$route.query.taskId
-      // console.log(this.$route.params.currentNo)
       axios({
         method: "get",
         url: "/followup/Paper/sendPaper",
@@ -190,7 +192,26 @@ export default {
           currentNo: this.currentNo,
         },
       }).then((res) => {
-        if(res.data.code===200){
+        console.log(res.data.msg)
+        if(res.data.msg=="0"){
+              this.$message({
+          showClose: true,
+          message: '您已提交过该问卷',
+          type: 'warning'
+        });
+           setTimeout(()=> {
+  //这个可以关闭安卓系统的手机
+   document.addEventListener(
+      "WeixinJSBridgeReady",
+      function() {
+         WeixinJSBridge.call("closeWindow");
+      },
+     false
+   );
+    //这个可以关闭ios系统的手机
+   WeixinJSBridge.call("closeWindow");},(500))
+        }
+       else if(res.data.code===200){
         this.form = res.data.data;
         console.log( this.form.questions)
         this.form.questions.forEach((question) => {
@@ -201,6 +222,8 @@ export default {
           console.error(res.data)
         }
       });
+      
+  
     },
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
@@ -248,13 +271,26 @@ export default {
                 questions: this.questions
             },
           }).then((res) => {
+            // console.log(res.data)
          if(res.data.code===200){
-        console.log(res); 
+          console.log(res); 
          this.$message({
           showClose: true,
           message: '提交成功',
           type: 'success',
         });
+  
+    setTimeout(()=> {
+  //这个可以关闭安卓系统的手机
+   document.addEventListener(
+      "WeixinJSBridgeReady",
+      function() {
+         WeixinJSBridge.call("closeWindow");
+      },
+     false
+   );
+    //这个可以关闭ios系统的手机
+   WeixinJSBridge.call("closeWindow");},(300))
             }else{
               console.error(res)
             }
