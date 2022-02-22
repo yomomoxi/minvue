@@ -7,14 +7,14 @@ Vue.use(Router)
 export const constantRoutes = [
   {
     // path: '/:id/:uname/:token',
-    path:'/',
+    path:'/userQquestionnaire',
     name: '问卷',
     component: userQquestionnaire
   },
   ]
 
   export default new Router({
-    mode: 'history', // 去掉url中的#
+    // mode: 'history', // 去掉url中的#
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
   })
