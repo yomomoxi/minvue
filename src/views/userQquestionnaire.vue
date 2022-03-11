@@ -274,11 +274,16 @@ export default {
             // console.log(res.data)
          if(res.data.code===200){
           console.log(res); 
-         this.$message({
-          showClose: true,
-          message: '提交成功',
-          type: 'success',
-        });
+        //  this.$message({
+        //   showClose: true,
+        //   message: '提交成功',
+        //   type: 'success',
+        // });
+
+       this.$router.push({
+         path: "/submit"//要跳转的页面的路由
+  });
+
   
     setTimeout(()=> {
   //这个可以关闭安卓系统的手机

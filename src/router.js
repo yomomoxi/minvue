@@ -1,15 +1,40 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import userQquestionnaire from "./views/userQquestionnaire"
+import submit from "./views/submit.vue"
+import nucleicAcid from './views/nucleicAcid.vue'
+import nuclearAcidResults from './views/nuclearAcidResults.vue'
+
 Vue.use(Router)
 
 // 公共路由
 export const constantRoutes = [
   {
+
     // path: '/:id/:uname/:token',
     path:'/',
+    name: '核酸报告',
+    component: nucleicAcid
+  },
+  {
+
+    // nuclearAcidResults
+    path:'/nuclearAcidResults',
+    name: '核酸结果',
+    component: nuclearAcidResults
+  },
+  {
+
+    // path: '/:id/:uname/:token',
+    path:'/userQquestionnaire',
     name: '问卷',
     component: userQquestionnaire
+  },
+  {
+    // path: '/:id/:uname/:token',
+    path:'/submit',
+    name: '问卷提交',
+    component: submit
   },
   ]
 

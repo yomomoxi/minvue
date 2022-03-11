@@ -10,7 +10,8 @@ module.exports = {
     proxy: {
       '/*': {
         // target: "http://127.0.0.1:8899",
-        target: 'http://192.168.0.51:8081',
+        // target: 'http://192.168.0.51:8081',
+        target:"http://350e75ae.nat123.fun",
         changeOrigin: true,
       },
     },
