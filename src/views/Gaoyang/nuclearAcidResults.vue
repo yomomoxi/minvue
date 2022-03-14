@@ -18,31 +18,32 @@
     </div>
 
     <!-- 身份信息 -->
-    <div class="details">乔健 <span style="margin-left: 20px">{{cardNo}}</span></div>
+    <div class="details">{{patient}} <span style="margin-left: 20px">{{cardNo}}</span></div>
     <!--详情  -->
 
-    <div class="content">
+    <div class="content" v-for="item in reportList" :key="item.id">
       <div class="isFelx">
         <div class="name">
-          采样名次:<span style="color: black; margin-left: 10px">新冠</span>
+          采样名次:<span style="color: black; margin-left: 10px">{{item.chineseName}}</span>
         </div>
         <div class="name">
           采样时间:<span style="color: black; margin-left: 10px"
-            >2022-02-11</span
+            >{{item.samplingTime}}</span
           >
         </div>
-
-        <div class="name">
-          检测结果:<span style="margin-left: 10px; color: #1989fa">阴性</span>
+        <div class="name" >
+          检测结果:<span style="margin-left: 10px; color: #1989fa">{{item.result}}</span>
         </div>
       </div>
-      <div class="otherFelx">
+      <div class="otherFelx" @click="showPopup">
         <div style="margin-top: -2px">详情</div>
         <van-icon name="arrow" id="arrow" />
       </div>
     </div>
     
-    
+      <van-popup v-model="show">
+      <img style="width:350px;"  src="../../assets/20319FBA1E621A84C64FB45710A80A39.jpg" alt=""></van-popup>
+
   </div>
 </template>
 
@@ -50,8 +51,11 @@
 export default {
   data() {
     return {
-      IDcard:"411381177273821029",
-      cardNo:''
+      IDcard:"",
+      cardNo:'',
+      show: false,
+      patient:"",
+      reportList:[]
     };
   },
 
@@ -64,8 +68,15 @@ export default {
   },
   created(){this.id()},
   methods: {
+     showPopup() {
+      this.show = true;
+    },
     id(){
 // IDcard 为身份证号码
+this.IDcard=this.$route.query.identityCard
+this.patient=this.$route.query.patient
+this.reportList=this.$route.query.reportList
+    console.log(this.reportList)
    let cardNo = this.IDcard.replace(/^(.{6})(?:\w+)(.{4})$/, "\$1********\$2")
    this.cardNo =cardNo
     console.log('隐藏后', cardNo)
@@ -117,6 +128,11 @@ body{
 ::v-deep .van-nav-bar__content{
   height: 50px !important;
 }
+ .van-icon {
+  font-size: 20px !important;
+  color: #646566 !important;
+}
+
 .otherFelx {
   color: #1989fa;
   display: flex;

@@ -2,13 +2,21 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import userQquestionnaire from "./views/userQquestionnaire"
 import submit from "./views/submit.vue"
-import nucleicAcid from './views/nucleicAcid.vue'
-import nuclearAcidResults from './views/nuclearAcidResults.vue'
+import nucleicAcid from './views/Gaoyang/nucleicAcid.vue'
+import nuclearAcidResults from './views/Gaoyang/nuclearAcidResults.vue'
+import picture from './views/Gaoyang/picture.vue'
 
 Vue.use(Router)
 
 // 公共路由
 export const constantRoutes = [
+  {
+
+    // path: '/:id/:uname/:token',
+    path:'/picture',
+    name: '转图片',
+    component: picture
+  },
   {
 
     // path: '/:id/:uname/:token',

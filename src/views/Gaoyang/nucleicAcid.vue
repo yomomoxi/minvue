@@ -8,10 +8,11 @@
     />
     <!-- 标题 -->
     <div>
-      <van-nav-bar title="高阳县医院" left-arrow>
-        <template #right>
+      <!-- left-arrow -->
+      <van-nav-bar title="高阳县医院" >
+        <!-- <template #right>
           <van-icon name="cross" color="inherit" size="18" />
-        </template>
+        </template> -->
       </van-nav-bar>
     </div>
 
@@ -21,6 +22,7 @@
       <van-field
         v-model="value"
         clearable
+         maxlength="18"
         left-icon="shenfenzheng"
         label="身份证"
         placeholder="请保持与证件一致"
@@ -40,8 +42,7 @@
         round
         block
         type="info"
-        to="./nuclearAcidResults"
-        native-type="submit"
+        @click="submit"
         >查询</van-button
       >
     </div>
@@ -49,6 +50,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -66,6 +68,31 @@ export default {
     },
     onClickRight() {
       Toast("按钮");
+    },
+    submit() {
+      console.log(this.value);
+  axios({
+        method: "get",
+        url: "/nucleicAcid/findNucleicAcidReportList/"+this.value,
+        // params: {
+        //  identityCard: this.value,
+        // },
+      }).then((res) => {
+        console.log(res.code)
+        if(res.data.code==200){
+           this.$router.push({
+        path: "/nuclearAcidResults",
+        query:{
+          identityCard:res.data.data.identityCard,
+          // 名字
+          patient:res.data.data.patient,
+          reportList:res.data.data.reportList
+        }
+        });
+        }
+    
+      })
+
     },
   },
 };
