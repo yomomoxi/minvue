@@ -46,11 +46,13 @@
         >查询</van-button
       >
     </div>
+    <div class="bottom">如报告中个人信息与证件不一致，请联系服务电话 0312-6609116</div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { Dialog } from 'vant';
 export default {
   data() {
     return {
@@ -89,8 +91,12 @@ export default {
           reportList:res.data.data.reportList
         }
         });
+        }else if(res.data.code==500) {
+       Dialog.confirm({
+       message: res.data.msg,
+       })
         }
-    
+      
       })
 
     },
@@ -129,5 +135,10 @@ export default {
 }
 .van-field__label {
   color: black;
+}
+.bottom{
+  margin: 46px;
+   font-size: 13px;
+  position: fixed; bottom: 0; 
 }
 </style>

@@ -10,8 +10,8 @@
       <!-- 标题 -->
       <div>
         <van-nav-bar title="核酸检测结果" left-arrow @click-left="onClickLeft">
-          <template #right>
-            <van-icon name="cross" color="inherit" size="18" />
+          <template #right >
+            <van-icon name="cross" color="inherit" size="18"  @click="onClickRight" />
           </template>
         </van-nav-bar>
       </div>
@@ -20,8 +20,8 @@
     <!-- 身份信息 -->
     <div class="details">{{patient}} <span style="margin-left: 20px">{{cardNo}}</span></div>
     <!--详情  -->
-
-    <div class="content" v-for="item in reportList" :key="item.id">
+    <div v-for="item in reportList" :key="item.id">
+    <div class="content" >
       <div class="isFelx">
         <div class="name">
           采样名次:<span style="color: black; margin-left: 10px">{{item.chineseName}}</span>
@@ -35,15 +35,17 @@
           检测结果:<span style="margin-left: 10px; color: #1989fa">{{item.result}}</span>
         </div>
       </div>
-      <div class="otherFelx" @click="showPopup">
+      <!-- @click="showPopup" -->
+      <div class="otherFelx" >
         <div style="margin-top: -2px">详情</div>
         <van-icon name="arrow" id="arrow" />
       </div>
     </div>
     
+    </div>
       <van-popup v-model="show">
       <img style="width:350px;"  src="../../assets/20319FBA1E621A84C64FB45710A80A39.jpg" alt=""></van-popup>
-
+     <div class="bottom">温馨提示：如有疑问，请电话联系0312-6609116</div>
   </div>
 </template>
 
@@ -68,9 +70,9 @@ export default {
   },
   created(){this.id()},
   methods: {
-     showPopup() {
-      this.show = true;
-    },
+    //  showPopup() {
+    //   this.show = true;
+    // },
     id(){
 // IDcard 为身份证号码
 this.IDcard=this.$route.query.identityCard
@@ -85,6 +87,19 @@ this.reportList=this.$route.query.reportList
     onClickLeft() {
       this.$router.go(-1);
     },
+    onClickRight(){
+       setTimeout(()=> {
+  //这个可以关闭安卓系统的手机
+   document.addEventListener(
+      "WeixinJSBridgeReady",
+      function() {
+         WeixinJSBridge.call("closeWindow");
+      },
+     false
+   );
+    //这个可以关闭ios系统的手机
+   WeixinJSBridge.call("closeWindow");},(500))
+    }
   },
 };
 </script>
@@ -147,5 +162,11 @@ body{
   padding: 10px;
   color: #646566;
   margin-left: 10px;
+}
+.bottom{
+  margin: 46px;
+  position: fixed; bottom: 0; 
+  font-size: 13px;
+  left: 30px;
 }
 </style>
