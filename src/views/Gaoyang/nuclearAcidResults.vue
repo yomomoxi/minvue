@@ -78,10 +78,10 @@ export default {
 this.IDcard=this.$route.query.identityCard
 this.patient=this.$route.query.patient
 this.reportList=this.$route.query.reportList
-    console.log(this.reportList)
+    // console.log(this.reportList)
    let cardNo = this.IDcard.replace(/^(.{6})(?:\w+)(.{4})$/, "\$1********\$2")
    this.cardNo =cardNo
-    console.log('隐藏后', cardNo)
+    // console.log('隐藏后', cardNo)
 
     },
     onClickLeft() {

@@ -72,7 +72,7 @@ export default {
       Toast("按钮");
     },
     submit() {
-      console.log(this.value);
+      // console.log(this.value);
   axios({
         method: "get",
         url: "/nucleicAcid/findNucleicAcidReportList/"+this.value,
@@ -80,7 +80,7 @@ export default {
         //  identityCard: this.value,
         // },
       }).then((res) => {
-        console.log(res.code)
+        // console.log(res.code)
         if(res.data.code==200){
            this.$router.push({
         path: "/nuclearAcidResults",
